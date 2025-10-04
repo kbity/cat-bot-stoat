@@ -57,6 +57,7 @@ async def on_message(event, /):
     if message.content.startswith(f"{prefix}setup"):
         db = load_db(message.server.id)
         db.setdefault("channels", {})
+        db["channels"].setdefault(message.channel.id, {})
         db["channels"][message.channel.id].setdefault("lastspawntime", 0)
         db["channels"][message.channel.id].setdefault("lastcatchtime", 0)
         db["channels"][message.channel.id].setdefault("nextspawntime", 0)
